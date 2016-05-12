@@ -3,7 +3,7 @@
 
     <label class="item item-input">
       <i class="icon ion-search placeholder-icon"></i>
-      <input type="text" placeholder="Search Champion" data-ng-model="searchChamp">
+      <input type="text" placeholder="Search" data-ng-model="searchChamp">
     </label>
 
     <br>
@@ -15,11 +15,6 @@
         <h2>{{ champ.name }}</h2>
         <i class="icon ion-android-add-circle" ng-click="addToTeam(champ)"></i>
         
-				<!-- deletes item -->
-<!--         <ion-option-button class="button-assertive"
-            ng-click="removeSong(song, $index)">
-          <i class="ion-minus-circled"></i>
-        </ion-option-button> -->
       </ion-item>
     </ion-list>
 

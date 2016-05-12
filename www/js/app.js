@@ -34,7 +34,7 @@ angular.module('lolcooldown', ['ionic', 'lolcooldown.controllers'])
       url: "/tab",
       abstract: true,
       templateUrl: "templates/tabs.html",
-      controller: 'HomeCtrl'
+      controller: 'TabsCtrl'
     })
 
     // Each tab has its own nav history stack:

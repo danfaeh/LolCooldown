@@ -13,8 +13,9 @@ angular.module('lolcooldown.services', [])
       if (!champ) return false;
 
       // add to favorites array
-      o.myGame.unshift(champ);
+      o.myGame.push(champ);
       o.newChamps++;
+      
 
       // persist this to the server
       // return $http.post(SERVER.url + '/favorites', {session_id: o.session_id, song_id:song.song_id });
@@ -30,6 +31,8 @@ angular.module('lolcooldown.services', [])
 
       // add to favorites array
       o.myGame.splice(index, 1);
+      o.newChamps--;
+      
 
       // persist this to the server
       // return $http({
