@@ -4,35 +4,26 @@ angular.module('lolcooldown.services', [])
     var o = {
       username: false,
       session_id: false,
-      myGame: [],
+      gameChamps: [],
+      replaceChamps: [],
       newChamps: 0
     };
 
     o.addChampToGame = function(champ) {
-      // make sure there's a song to add
-      if (!champ) return false;
-
-      // add to favorites array
-      o.myGame.push(champ);
+      // add to gameChamps array
+      o.gameChamps.push(champ);
       o.newChamps++;
       
-
       // persist this to the server
       // return $http.post(SERVER.url + '/favorites', {session_id: o.session_id, song_id:song.song_id });
     };
 
-    o.champCount = function() {
-      return o.newChamps;
-    };
-
     o.removeChampFromGame = function(champ, index) {
-      // make sure there's a song to add
-      if (!champ) return false;
-
-      // add to favorites array
-      o.myGame.splice(index, 1);
+      // remove champ from user's game
+      o.replaceChamps.push(o.gameChamps.splice(index, 1));
+      console.log('replaceChamps',o.replaceChamps);
       o.newChamps--;
-      
+
 
       // persist this to the server
       // return $http({
@@ -40,6 +31,10 @@ angular.module('lolcooldown.services', [])
       //   url: SERVER.url + '/favorites',
       //   params: { session_id: o.session_id, song_id:song.song_id }
       // });
+    };
+
+    o.champCount = function() {
+      return o.newChamps;
     };
 
     // gets the entire list of this user's favs from server

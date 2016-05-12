@@ -1,28 +1,28 @@
 angular.module('lolcooldown.controllers', ['lolcooldown.services'])
 
 .controller('HomeCtrl', function($rootScope, $scope, $http, User) {
-	$scope.teamCount = 0;
-	$scope.myTeam= [];
 	$scope.champs = [];
 	getChamps();
 
+	$scope.$on('xyz', function(event, data) { 
+		console.log('got emit'); 
+		console.log(data); 
+		$scope.champs = $scope.champs.concat(User.replaceChamps);
+	});
 
-
-	$scope.addToTeam = function(champ){
-		if (champ) User.addChampToGame(champ);
+	$scope.addToTeam = function(champ, index){
+		$scope.champs.splice(index,1);
+		User.addChampToGame(champ);
+  };
 
   	// $scope.myTeam.push(champ);
   	// $rootScope.$broadcast('update');
   	// console.log('My Team', $scope.myTeam, "team count", $scope.teamCount);
-  };
 
   // $scope.$on('update',function(){
   // 	$scope.teamCount ++;
   // 	$scope.myTeam = $scope.myTeam;
   // });
-
-  $scope.gameChamps = User.champCount();
-
 
   // Get champs array from riot api
   function getChamps(){
@@ -66,9 +66,7 @@ angular.module('lolcooldown.controllers', ['lolcooldown.services'])
 })
 
 .controller('GameCtrl', function($scope, User) {
-	$scope.myGame = User.myGame;
-	console.log('game champs', $scope.myGame);
-	console.log('game ctrl connected');
+	$scope.myGame = User.gameChamps;
 
 	$scope.removeChamp = function(champ, index){
 		User.removeChampFromGame(champ, index);
@@ -108,4 +106,17 @@ angular.module('lolcooldown.controllers', ['lolcooldown.services'])
 
 .controller('TabsCtrl', function($scope, User) {
 	$scope.gameChamps = User.champCount;
+
+  // method to any champions removed from game
+  $scope.enteringHome = function() {
+  	console.log('entering home'); 
+  	$scope.$broadcast('xyz', User.replaceChamps);
+  };
+
 });
+
+
+
+
+
+

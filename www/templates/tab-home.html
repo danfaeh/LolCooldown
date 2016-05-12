@@ -9,12 +9,15 @@
     <br>
 
 		<ion-list>
-      <ion-item class="item-avatar item-icon-right" ng-repeat="champ in champs | orderBy: 'name' | filter: searchChamp">
+      <ion-item class="item-avatar item-button-right" ng-repeat="champ in champs | filter: searchChamp">
 
         <img ng-src="{{ champ.img }}">
         <h2>{{ champ.name }}</h2>
-        <i class="icon ion-android-add-circle" ng-click="addToTeam(champ)"></i>
-        
+
+        <button class="button button-positive" ng-click="addToTeam(champ, $index)">
+          <i class="icon ion-android-add-circle"></i>
+        </button>
+
       </ion-item>
     </ion-list>
 
