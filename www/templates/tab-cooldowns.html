@@ -1,10 +1,20 @@
-<ion-view title="Cooldowns">
-  <ion-content>
-  	Cooldowns
-<!--     <ion-list>
-      <ion-item ng-repeat="friend in friends" type="item-text-wrap" href="#/tab/friend/{{friend.id}}">
-        {{friend.name}}
+<ion-view title="Your Game">
+  <ion-content class="padding">
+
+		<ion-list>
+      <ion-item class="item-avatar" ng-click="openChamp(champ)" ng-repeat="champ in gameChamps | orderBy: 'name'">
+
+        <img ng-src="{{ champ.img }}">
+        <h2>{{ champ.name }}</h2>
+        
+				<!-- deletes item -->
+        <ion-option-button class="button-assertive"
+            ng-click="removeChamp(champ, $index)">
+          <i class="ion-minus-circled"></i>
+        </ion-option-button>
       </ion-item>
-    </ion-list> -->
+    </ion-list>
+
+
   </ion-content>
 </ion-view>

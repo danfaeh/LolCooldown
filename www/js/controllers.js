@@ -1,33 +1,31 @@
 angular.module('starter.controllers', [])
 
 .controller('HomeCtrl', function($scope, $http) {
-	$scope.names = [];
 	$scope.champs = [];
 	getChamps();
+
   // Get champs from riot api
   function getChamps(){
     $http.get('https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?champData=spells&api_key=5b0779a8-6a96-4ca0-ad88-95deb2561b41')
       .then(function(response) {
-        var champObj = response.data.data;
-	  		window.x = champObj;      
+        var champObj = response.data.data;      
+	  		var champImg= 'http://www.mobafire.com/images/champion/icon/'; 
+	  		window.x = champObj;
 
-	      angular.forEach(champObj, function(key) {
-				  $scope.names.push({"name": key.name}); 
+	  		//loop through each champ object saving name, img, and ability cooldowns
+	      angular.forEach(champObj, function(value, key) {
+	      	// console.log(value.spells[0].cooldownBurn);
+	      	var imgUrl = champImg + value.name + ".png";
+	      	imgUrl = imgUrl.replace(/\s+/g, '-').replace(/'/,'').toLowerCase();
+
+          if (value.name === "Dr. Mundo"){
+          	imgUrl = "http://www.mobafire.com/images/champion/icon/dr-mundo.png";
+          }	
+         
+          $scope.champs.push({"name": value.name, "img": imgUrl, "qName": value.spells[0].name, "qCost": value.spells[0].cooldownBurn, "wName": value.spells[1].name, "wCost": value.spells[1].cooldownBurn, "eName": value.spells[2].name, "eCost": value.spells[2].cooldownBurn, "rName": value.spells[3].name, "rCost": value.spells[3].cooldownBurn,});
+
 				});
-      		
-	      // loop through all champs & grab image URLs
-	      var champImg= 'http://www.mobafire.com/images/champion/icon/';  
-	      var length = $scope.names.length;
-	        for (var i=0;i<length;i++) {
-	          var imgUrl = champImg + $scope.names[i].name + ".png";
-	          imgUrl = imgUrl.replace(/\s+/g, '-').replace(/'/,'').toLowerCase();
-	          if ($scope.names[i].name === "Dr. Mundo"){
-	          	imgUrl = "http://www.mobafire.com/images/champion/icon/dr-mundo.png";
-	          	$scope.champs.push({"name": $scope.names[i].name, "img": imgUrl});
-	          }else{
-	          	$scope.champs.push({"name": $scope.names[i].name, "img": imgUrl});
-	        	}
-	        }
+      					
 	      window.z = $scope.champs;  
       });
   }
@@ -45,10 +43,6 @@ angular.module('starter.controllers', [])
   // }
 
 
-})
-
-.controller('CooldownsCtrl', function($scope) {
-  // $scope.friends = Friends.all();
 })
 
 .controller('FriendDetailCtrl', function($scope, $stateParams, Friends) {
