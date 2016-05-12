@@ -43,7 +43,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       views: {
         'tab-home': {
           templateUrl: 'templates/tab-home.html',
-          controller: 'HomeCtrl'
+          controller: 'HomeCtrl',
+          controllerAs: 'champs'
         }
       }
     })
