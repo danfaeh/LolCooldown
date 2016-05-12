@@ -1,6 +1,6 @@
 {
-  "name": "ionic-heroku",
-  "description": "Ionic Node.js Heroku app",
+  "name": "LolCooldown",
+  "description": "A mobile reference for League of Legends Cooldown Info",
   "version": "0.0.1",
   "private": true,
   "dependencies": {

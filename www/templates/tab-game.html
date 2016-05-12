@@ -2,7 +2,7 @@
   <ion-content class="padding">
 
 		<ion-list>
-      <ion-item class="item-avatar" ng-click="openChamp(champ)" ng-repeat="champ in gameChamps | orderBy: 'name'">
+      <ion-item class="item-avatar" ng-click="openChamp(champ)" ng-repeat="champ in myGame | orderBy: 'name'">
 
         <img ng-src="{{ champ.img }}">
         <h2>{{ champ.name }}</h2>
@@ -12,6 +12,7 @@
             ng-click="removeChamp(champ, $index)">
           <i class="ion-minus-circled"></i>
         </ion-option-button>
+        
       </ion-item>
     </ion-list>
 

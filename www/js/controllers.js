@@ -1,10 +1,25 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['starter.services'])
 
-.controller('HomeCtrl', function($scope, $http) {
+.controller('HomeCtrl', function($rootScope, $scope, $http, User) {
+	$scope.teamCount = 0;
+	$scope.myTeam= [];
 	$scope.champs = [];
 	getChamps();
 
-  // Get champs from riot api
+
+
+	$scope.addToTeam = function(champ){
+  	$scope.myTeam.push(champ);
+  	$rootScope.$broadcast('update');
+  	console.log('My Team', $scope.myTeam, "team count", $scope.teamCount);
+  };
+
+  $scope.$on('update',function(){
+  	$scope.teamCount ++;
+  	$scope.myTeam = $scope.myTeam;
+  });
+
+  // Get champs array from riot api
   function getChamps(){
     $http.get('https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?champData=spells&api_key=5b0779a8-6a96-4ca0-ad88-95deb2561b41')
       .then(function(response) {
@@ -24,11 +39,11 @@ angular.module('starter.controllers', [])
          
           $scope.champs.push({"name": value.name, "img": imgUrl, "qName": value.spells[0].name, "qCost": value.spells[0].cooldownBurn, "wName": value.spells[1].name, "wCost": value.spells[1].cooldownBurn, "eName": value.spells[2].name, "eCost": value.spells[2].cooldownBurn, "rName": value.spells[3].name, "rCost": value.spells[3].cooldownBurn,});
 
-				});
-      					
+				});			
 	      window.z = $scope.champs;  
       });
   }
+
 
   //   function getChamps(){
   // 	$.getJSON( "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?champData=spells&api_key=5b0779a8-6a96-4ca0-ad88-95deb2561b41", function( data ) {
@@ -45,9 +60,18 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('FriendDetailCtrl', function($scope, $stateParams, Friends) {
-  $scope.friend = Friends.get($stateParams.friendId);
+.controller('GameCtrl', function($scope, User) {
+	$scope.myGame = User.myGame;
 })
 
 .controller('SummonersCtrl', function($scope) {
 });
+
+
+// .controller('TabsCtrl', function($scope) {
+// 	$scope.teamCount = 1;
+
+//   $scope.favCount = function(){
+//   	return $scope.teamCount;
+//   };
+// });

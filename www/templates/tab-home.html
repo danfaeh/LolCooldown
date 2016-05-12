@@ -9,10 +9,11 @@
     <br>
 
 		<ion-list>
-      <ion-item class="item-avatar" ng-click="openChamp(champ)" ng-repeat="champ in champs | orderBy: 'name' | filter: searchChamp">
+      <ion-item class="item-avatar item-icon-right" ng-repeat="champ in champs | orderBy: 'name' | filter: searchChamp">
 
         <img ng-src="{{ champ.img }}">
         <h2>{{ champ.name }}</h2>
+        <i class="icon ion-android-add-circle" ng-click="addToTeam(champ)"></i>
         
 				<!-- deletes item -->
 <!--         <ion-option-button class="button-assertive"

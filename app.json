@@ -1,7 +1,6 @@
 {
-  "name": "Ionic Starter",
-  "description": "A simple Ionic app for Heroku",
-  "repository": "https://github.com/driftyco/ionic-heroku-button",
-  "logo": "http://ionicframework.com/img/ionic-logo-blog.png",
-  "keywords": ["ionic", "static"]
+  "name": "LolCooldown",
+  "description": "A mobile reference for League of Legends Cooldown Info",
+  "repository": "https://github.com/danfaeh/LolCooldown",
+  "keywords": ["ionic"]
 }

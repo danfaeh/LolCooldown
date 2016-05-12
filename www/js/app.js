@@ -33,7 +33,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     .state('tab', {
       url: "/tab",
       abstract: true,
-      templateUrl: "templates/tabs.html"
+      templateUrl: "templates/tabs.html",
+      controller: 'HomeCtrl'
     })
 
     // Each tab has its own nav history stack:
@@ -48,24 +49,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     })
 
-    .state('tab.cooldowns', {
-      url: '/cooldowns',
+    .state('tab.game', {
+      url: '/game',
       views: {
-        'tab-cooldowns': {
-          templateUrl: 'templates/tab-cooldowns.html',
-          controller: 'HomeCtrl'
+        'tab-game': {
+          templateUrl: 'templates/tab-game.html',
+          controller: 'GameCtrl'
         }
       }
     })
-    // .state('tab.friend-detail', {
-    //   url: '/friend/:friendId',
-    //   views: {
-    //     'tab-friends': {
-    //       templateUrl: 'templates/friend-detail.html',
-    //       controller: 'FriendDetailCtrl'
-    //     }
-    //   }
-    // })
 
     .state('tab.summoners', {
       url: '/summoners',
