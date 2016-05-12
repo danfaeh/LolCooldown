@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['starter.services'])
+angular.module('lolcooldown.controllers', ['lolcooldown.services'])
 
 .controller('HomeCtrl', function($rootScope, $scope, $http, User) {
 	$scope.teamCount = 0;

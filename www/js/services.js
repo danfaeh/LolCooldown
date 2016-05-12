@@ -1,4 +1,4 @@
-angular.module('starter.services', [])
+angular.module('lolcooldown.services', [])
 
   .factory('User', function($http, $q) {
     var o = {
