@@ -1,7 +1,7 @@
 angular.module('starter.controllers', [])
 
 .controller('HomeCtrl', function($scope, $http) {
-
+	$scope.names = [];
 	$scope.champs = [];
 	getChamps();
   // Get champs from riot api
@@ -12,17 +12,23 @@ angular.module('starter.controllers', [])
 	  		window.x = champObj;      
 
 	      angular.forEach(champObj, function(key) {
-				  $scope.champs.push({"name": key.name}); 
+				  $scope.names.push({"name": key.name}); 
 				});
-				window.z = $scope.champs;
-        // var champImg= 'http://www.mobafire.com/images/champion/icon/';
-
-        // // loop through all champs & grab image URLs
-        // for (var i=0;i<length;i++) {
-        //   var imgUrl = champImg + champs[i].name + ".png";
-        //   imgUrl = imgUrl.replace(/\s+/g, '-').replace(/'/,'').toLowerCase();
-        //   vm.champs.push({"name": champs[i].name, "img": imgUrl, position: champs[i].position, damage: champs[i].damage,  hardcc: champs[i].hardcc, softcc: champs[i].softcc, tank: champs[i].tank, engage: champs[i].engage,   seige:champs[i].seige, waveclear:champs[i].waveclear, aram: champs[i].aram});
-        // }
+      		
+	      // loop through all champs & grab image URLs
+	      var champImg= 'http://www.mobafire.com/images/champion/icon/';  
+	      var length = $scope.names.length;
+	        for (var i=0;i<length;i++) {
+	          var imgUrl = champImg + $scope.names[i].name + ".png";
+	          imgUrl = imgUrl.replace(/\s+/g, '-').replace(/'/,'').toLowerCase();
+	          if ($scope.names[i].name === "Dr. Mundo"){
+	          	imgUrl = "http://www.mobafire.com/images/champion/icon/dr-mundo.png";
+	          	$scope.champs.push({"name": $scope.names[i].name, "img": imgUrl});
+	          }else{
+	          	$scope.champs.push({"name": $scope.names[i].name, "img": imgUrl});
+	        	}
+	        }
+	      window.z = $scope.champs;  
       });
   }
 
