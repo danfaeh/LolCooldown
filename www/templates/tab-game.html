@@ -1,20 +1,32 @@
 <ion-view title="Your Game">
-  <ion-content class="padding">
+  <ion-content class="padding" scroll="true">
 
 		<ion-list>
       <div ng-repeat="champ in myGame">
-        <ion-item class="item item-divider item-thumbnail-left" ng-click="openChamp(champ)">
-          <img class="padding" ng-src="{{ champ.img }}">
-          <h2>{{ champ.name }}</h2>
-          <p class="item-note">(swipe to delete)</p>
-          
-  				<!-- deletes item -->
+
+        <!-- champion divider -->
+        <ion-item class="item item-divider item-thumbnail-left item-stable" ng-click="toggleGroup(champ)">
+          <img class="padding col col-75" ng-src="{{ champ.img }}">
+          <h2 class="col col-center">{{ champ.name }}</h2>
+          <p class="item-note">(swipe to delete)</p>         
+
+  				<!-- SLIDE ~~ Remove champ -->
           <ion-option-button class="button-assertive"
               ng-click="removeChamp(champ, $index)">
             <i class="ion-minus-circled"></i>
           </ion-option-button> 
-        </ion-item>
+          <!-- END SLIDE ~~ Remove champ -->
 
+        </ion-item>
+        <!-- END champ divider -->
+
+        <!-- Enemy Tips -->
+        <ion-item class="card item-accordion item-text-wrap" ng-show="isGroupShown(champ)">
+          {{ champ.tips }}
+        </ion-item> 
+
+
+        <!-- champ spells (q,w,e,r) -->
         <div class="item item-avatar">
             <img ng-src="{{ champ.qImg }}">
             <h2>{{ champ.qName}}</h2>
@@ -35,10 +47,10 @@
             <h2>{{ champ.rName}}</h2>
             <p class="item-note">{{ champ.rCost}}</p>
         </div>
+        <!-- END champ spells (q,w,e,r) -->
         <br>
       </div>  
     </ion-list>
-
 
   </ion-content>
 </ion-view>

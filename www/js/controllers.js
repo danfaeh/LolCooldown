@@ -5,34 +5,23 @@ angular.module('lolcooldown.controllers', ['lolcooldown.services'])
 	getChamps();
 
 	$scope.$on('xyz', function(event, data) { 
-		console.log('got emit'); 
-		console.log(data); 
 		$scope.champs = $scope.champs.concat(User.replaceChamps);
 	});
 
-	$scope.addToTeam = function(champ, index){
+	$scope.addToTeam = function(champ){
+    var index = $scope.champs.indexOf(champ);
 		$scope.champs.splice(index,1);
 		User.addChampToGame(champ);
   };
 
-  	// $scope.myTeam.push(champ);
-  	// $rootScope.$broadcast('update');
-  	// console.log('My Team', $scope.myTeam, "team count", $scope.teamCount);
-
-  // $scope.$on('update',function(){
-  // 	$scope.teamCount ++;
-  // 	$scope.myTeam = $scope.myTeam;
-  // });
-
-  // Get champs array from riot api
+  // Get champs info from riot api
   function getChamps(){
   	// $http.get('https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?champData=all&api_key=5b0779a8-6a96-4ca0-ad88-95deb2561b41')
   	// 	.then(function(response){
   	// 		window.gp = response.data.data;
   	// 	});
 
-
-    $http.get('https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?champData=spells&api_key=5b0779a8-6a96-4ca0-ad88-95deb2561b41')
+    $http.get('https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?champData=enemytips,passive,spells&api_key=5b0779a8-6a96-4ca0-ad88-95deb2561b41')
       .then(function(response) {
         var champObj = response.data.data;      
 	  		var champImg= 'http://www.mobafire.com/images/champion/icon/'; 
@@ -63,10 +52,13 @@ angular.module('lolcooldown.controllers', ['lolcooldown.services'])
           if (value.name === "Dr. Mundo"){
           	champImgUrl = "http://www.mobafire.com/images/champion/icon/dr-mundo.png";
           }	
+
+          var tips = value.enemytips;
          
           $scope.champs.push({
             "name": value.name, 
-            "img": champImgUrl, 
+            "img": champImgUrl,
+            "tips": tips,
             "qName": value.spells[0].name, 
             "qCost": value.spells[0].cooldownBurn,
             "qImg": qImgUrl,
@@ -84,22 +76,8 @@ angular.module('lolcooldown.controllers', ['lolcooldown.services'])
 	      window.z = $scope.champs;  
       });
   }
-
-
-  //   function getChamps(){
-  // 	$.getJSON( "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?champData=spells&api_key=5b0779a8-6a96-4ca0-ad88-95deb2561b41", function( data ) {
-  //     var champs = data.data;
-  // 		window.x = champs;
-
-  //     $.each( champs, function( key ) { 
-  //       $( "#champ_container").append( '<a href="'+key+'"><div class="col-xs-offset-1 col-xs-10 row champ btn btn-default btn-lg">' + key + '</div><a>' );
-  //     });
-  //     console.log('finished append');
-  //   });
-  // }
-
-
 })
+
 
 .controller('GameCtrl', function($scope, User) {
 	$scope.myGame = User.gameChamps;
@@ -107,6 +85,17 @@ angular.module('lolcooldown.controllers', ['lolcooldown.services'])
 	$scope.removeChamp = function(champ, index){
 		User.removeChampFromGame(champ, index);
 	};
+
+  $scope.toggleGroup = function(group) {
+    if ($scope.isGroupShown(group)) {
+      $scope.shownGroup = null;
+    } else {
+      $scope.shownGroup = group;
+    }
+  };
+  $scope.isGroupShown = function(group) {
+    return $scope.shownGroup === group;
+  };  
 
 })
 
@@ -145,7 +134,6 @@ angular.module('lolcooldown.controllers', ['lolcooldown.services'])
 
   // method to any champions removed from game
   $scope.enteringHome = function() {
-  	console.log('entering home'); 
   	$scope.$broadcast('xyz', User.replaceChamps);
   };
 

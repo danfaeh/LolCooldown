@@ -5,16 +5,15 @@
       <i class="icon ion-search placeholder-icon"></i>
       <input type="text" placeholder="Search" data-ng-model="searchChamp">
     </label>
-
     <br>
 
 		<ion-list>
-      <ion-item class="item-avatar item-button-right" ng-repeat="champ in champs | filter: searchChamp">
+      <ion-item class="item-avatar item-button-right" ng-repeat="champ in champs | orderBy: 'name' | filter: searchChamp">
 
         <img ng-src="{{ champ.img }}">
         <h2>{{ champ.name }}</h2>
 
-        <button class="button button-positive" ng-click="addToTeam(champ, $index)">
+        <button class="button button-positive" ng-click="addToTeam(champ)">
           <i class="icon ion-android-add-circle"></i>
         </button>
 
