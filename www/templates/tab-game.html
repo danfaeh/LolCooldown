@@ -5,7 +5,7 @@
       <div ng-repeat="champ in myGame">
 
         <!-- champion divider -->
-        <ion-item class="item item-divider item-thumbnail-left item-stable" ng-click="toggleGroup(champ)">
+        <ion-item class="item item-divider item-thumbnail-left item-stable" ng-click="toggleChamp(champ)">
           <img class="padding col col-75" ng-src="{{ champ.img }}">
           <h2 class="col col-center">{{ champ.name }}</h2>
           <p class="item-note">(swipe to delete)</p>         
@@ -16,37 +16,56 @@
             <i class="ion-minus-circled"></i>
           </ion-option-button> 
           <!-- END SLIDE ~~ Remove champ -->
-
         </ion-item>
         <!-- END champ divider -->
 
         <!-- Enemy Tips -->
-        <ion-item class="card item-accordion item-text-wrap" ng-show="isGroupShown(champ)">
+        <ion-item class="card item-accordion item-text-wrap" ng-show="isChampShown(champ)">
           {{ champ.tips }}
         </ion-item> 
 
 
         <!-- champ spells (q,w,e,r) -->
-        <div class="item item-avatar">
+        <div class="item item-avatar item-stable" ng-click="toggleChamp('q')">
             <img ng-src="{{ champ.qImg }}">
             <h2>{{ champ.qName}}</h2>
             <p class="item-note">{{ champ.qCost}}</p>
         </div>
-        <div class="item item-avatar">
+
+        <ion-item class="card item-accordion item-text-wrap" ng-show="isChampShown('q')">
+          {{ champ.qInfo }}
+        </ion-item> 
+
+        <div class="item item-avatar item-stable" ng-click="toggleChamp('w')">
             <img ng-src="{{ champ.wImg }}">
             <h2>{{ champ.wName}}</h2>
             <p class="item-note">{{ champ.wCost}}</p>
         </div>
-        <div class="item item-avatar">
+
+        <ion-item class="card item-accordion item-text-wrap" ng-show="isChampShown('w')">
+          {{ champ.wInfo }}
+        </ion-item> 
+
+        <div class="item item-avatar item-stable" ng-click="toggleChamp('e')">
             <img ng-src="{{ champ.eImg }}">
             <h2>{{ champ.eName}}</h2>
             <p class="item-note">{{ champ.eCost}}</p>
         </div>
-        <div class="item item-avatar">
+
+        <ion-item class="card item-accordion item-text-wrap" ng-show="isChampShown('e')">
+          {{ champ.eInfo }}
+        </ion-item> 
+
+        <div class="item item-avatar item-stable" ng-click="toggleChamp('r')">
             <img ng-src="{{ champ.rImg }}">
             <h2>{{ champ.rName}}</h2>
             <p class="item-note">{{ champ.rCost}}</p>
         </div>
+
+        <ion-item class="card item-accordion item-text-wrap" ng-show="isChampShown('r')">
+          {{ champ.rInfo }}
+        </ion-item> 
+
         <!-- END champ spells (q,w,e,r) -->
         <br>
       </div>  

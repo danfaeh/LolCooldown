@@ -54,6 +54,7 @@ angular.module('lolcooldown.controllers', ['lolcooldown.services'])
           }	
 
           var tips = value.enemytips;
+          var qInfo = value.spells[0].sanitizedDescription;
          
           $scope.champs.push({
             "name": value.name, 
@@ -62,15 +63,19 @@ angular.module('lolcooldown.controllers', ['lolcooldown.services'])
             "qName": value.spells[0].name, 
             "qCost": value.spells[0].cooldownBurn,
             "qImg": qImgUrl,
+            "qInfo": value.spells[0].sanitizedDescription,
             "wName": value.spells[1].name, 
             "wCost": value.spells[1].cooldownBurn, 
             "wImg": wImgUrl,
+            "wInfo": value.spells[1].sanitizedDescription,
             "eName": value.spells[2].name, 
             "eCost": value.spells[2].cooldownBurn,
-            "eImg": eImgUrl, 
+            "eImg": eImgUrl,
+            "eInfo": value.spells[2].sanitizedDescription, 
             "rName": value.spells[3].name, 
             "rCost": value.spells[3].cooldownBurn,
-            "rImg": rImgUrl
+            "rImg": rImgUrl,
+            "rInfo": value.spells[3].sanitizedDescription
           });
 				});			
 	      window.z = $scope.champs;  
@@ -86,15 +91,15 @@ angular.module('lolcooldown.controllers', ['lolcooldown.services'])
 		User.removeChampFromGame(champ, index);
 	};
 
-  $scope.toggleGroup = function(group) {
-    if ($scope.isGroupShown(group)) {
-      $scope.shownGroup = null;
+  $scope.toggleChamp = function(champ) {
+    if ($scope.isChampShown(champ)) {
+      $scope.shownChamp = null;
     } else {
-      $scope.shownGroup = group;
+      $scope.shownChamp = champ;
     }
   };
-  $scope.isGroupShown = function(group) {
-    return $scope.shownGroup === group;
+  $scope.isChampShown = function(champ) {
+    return $scope.shownChamp === champ;
   };  
 
 })
