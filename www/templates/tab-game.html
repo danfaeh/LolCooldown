@@ -2,19 +2,41 @@
   <ion-content class="padding">
 
 		<ion-list>
-      <ion-item class="item-avatar" ng-click="openChamp(champ)" ng-repeat="champ in myGame | orderBy: 'name'">
+      <div ng-repeat="champ in myGame">
+        <ion-item class="item item-divider item-thumbnail-left" ng-click="openChamp(champ)">
+          <img class="padding" ng-src="{{ champ.img }}">
+          <h2>{{ champ.name }}</h2>
+          <p class="item-note">(swipe to delete)</p>
+          
+  				<!-- deletes item -->
+          <ion-option-button class="button-assertive"
+              ng-click="removeChamp(champ, $index)">
+            <i class="ion-minus-circled"></i>
+          </ion-option-button> 
+        </ion-item>
 
-        <img ng-src="{{ champ.img }}">
-        <h2>{{ champ.name }}</h2>
-        <p class="item-note">(swipe to delete)</p>
-        
-				<!-- deletes item -->
-        <ion-option-button class="button-assertive"
-            ng-click="removeChamp(champ, $index)">
-          <i class="ion-minus-circled"></i>
-        </ion-option-button>
-        
-      </ion-item>
+        <div class="item item-avatar">
+            <img ng-src="{{ champ.qImg }}">
+            <h2>{{ champ.qName}}</h2>
+            <p class="item-note">{{ champ.qCost}}</p>
+        </div>
+        <div class="item item-avatar">
+            <img ng-src="{{ champ.wImg }}">
+            <h2>{{ champ.wName}}</h2>
+            <p class="item-note">{{ champ.wCost}}</p>
+        </div>
+        <div class="item item-avatar">
+            <img ng-src="{{ champ.eImg }}">
+            <h2>{{ champ.eName}}</h2>
+            <p class="item-note">{{ champ.eCost}}</p>
+        </div>
+        <div class="item item-avatar">
+            <img ng-src="{{ champ.rImg }}">
+            <h2>{{ champ.rName}}</h2>
+            <p class="item-note">{{ champ.rCost}}</p>
+        </div>
+        <br>
+      </div>  
     </ion-list>
 
 

@@ -26,24 +26,60 @@ angular.module('lolcooldown.controllers', ['lolcooldown.services'])
 
   // Get champs array from riot api
   function getChamps(){
+  	// $http.get('https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?champData=all&api_key=5b0779a8-6a96-4ca0-ad88-95deb2561b41')
+  	// 	.then(function(response){
+  	// 		window.gp = response.data.data;
+  	// 	});
+
+
     $http.get('https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?champData=spells&api_key=5b0779a8-6a96-4ca0-ad88-95deb2561b41')
       .then(function(response) {
         var champObj = response.data.data;      
 	  		var champImg= 'http://www.mobafire.com/images/champion/icon/'; 
+        var spellImg = 'http://www.mobafire.com/images/ability/';
 	  		window.x = champObj;
 
 	  		//loop through each champ object saving name, img, and ability cooldowns
 	      angular.forEach(champObj, function(value, key) {
 	      	// console.log(value.spells[0].cooldownBurn);
-	      	var imgUrl = champImg + value.name + ".png";
-	      	imgUrl = imgUrl.replace(/\s+/g, '-').replace(/'/,'').toLowerCase();
+          var champName = value.name;
+          champName = normalize(champName);
+	      	var champImgUrl = champImg + champName + ".png";
+
+          var qImgUrl = spellImg + champName + "-" + value.spells[0].name + ".png";
+          var wImgUrl = spellImg + champName + "-" + value.spells[1].name + ".png";
+          var eImgUrl = spellImg + champName + "-" + value.spells[2].name + ".png";
+          var rImgUrl = spellImg + champName + "-" + value.spells[3].name + ".png";
+
+          qImgUrl = normalize(qImgUrl);
+          wImgUrl = normalize(wImgUrl);
+          eImgUrl = normalize(eImgUrl);
+          rImgUrl = normalize(rImgUrl);
+
+          function normalize(url){
+            return url.replace(/\s+/g, '-').replace(/'/,'').toLowerCase();
+          }
 
           if (value.name === "Dr. Mundo"){
-          	imgUrl = "http://www.mobafire.com/images/champion/icon/dr-mundo.png";
+          	champImgUrl = "http://www.mobafire.com/images/champion/icon/dr-mundo.png";
           }	
          
-          $scope.champs.push({"name": value.name, "img": imgUrl, "qName": value.spells[0].name, "qCost": value.spells[0].cooldownBurn, "wName": value.spells[1].name, "wCost": value.spells[1].cooldownBurn, "eName": value.spells[2].name, "eCost": value.spells[2].cooldownBurn, "rName": value.spells[3].name, "rCost": value.spells[3].cooldownBurn,});
-
+          $scope.champs.push({
+            "name": value.name, 
+            "img": champImgUrl, 
+            "qName": value.spells[0].name, 
+            "qCost": value.spells[0].cooldownBurn,
+            "qImg": qImgUrl,
+            "wName": value.spells[1].name, 
+            "wCost": value.spells[1].cooldownBurn, 
+            "wImg": wImgUrl,
+            "eName": value.spells[2].name, 
+            "eCost": value.spells[2].cooldownBurn,
+            "eImg": eImgUrl, 
+            "rName": value.spells[3].name, 
+            "rCost": value.spells[3].cooldownBurn,
+            "rImg": rImgUrl
+          });
 				});			
 	      window.z = $scope.champs;  
       });
