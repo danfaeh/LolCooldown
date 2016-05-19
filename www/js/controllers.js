@@ -33,7 +33,9 @@ angular.module('lolcooldown.controllers', ['lolcooldown.services'])
 	      	// console.log(value.spells[0].cooldownBurn);
           var champName = value.name;
           champName = normalize(champName);
-	      	var champImgUrl = champImg + champName + ".png";
+          var champImgUrl = champImg + champName + ".png";
+          var properChampName = capitalizeFirstLetter(champName);
+          var splashUrl = splashImg + properChampName + "_0.jpg";
 
           var qImgUrl = spellImg + champName + "-" + value.spells[0].name + ".png";
           var wImgUrl = spellImg + champName + "-" + value.spells[1].name + ".png";
@@ -45,13 +47,17 @@ angular.module('lolcooldown.controllers', ['lolcooldown.services'])
           eImgUrl = normalize(eImgUrl);
           rImgUrl = normalize(rImgUrl);
 
+          function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+          }
+
           function normalize(url){
             return url.replace(/\s+/g, '-').replace(/'/,'').toLowerCase();
           }
 
           if (value.name === "Dr. Mundo"){
-          	champImgUrl = "http://www.mobafire.com/images/champion/icon/dr-mundo.png";
-          }	
+            champImgUrl = "http://www.mobafire.com/images/champion/icon/dr-mundo.png";
+          } 
 
           var tips = value.enemytips;
           var qInfo = value.spells[0].sanitizedDescription;
@@ -59,6 +65,7 @@ angular.module('lolcooldown.controllers', ['lolcooldown.services'])
           $scope.champs.push({
             "name": value.name, 
             "img": champImgUrl,
+            "splash": splashUrl,
             "tips": tips,
             "qName": value.spells[0].name, 
             "qCost": value.spells[0].cooldownBurn,
