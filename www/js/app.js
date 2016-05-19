@@ -63,7 +63,7 @@ angular.module('lolcooldown', ['ionic', 'lolcooldown.controllers'])
       url: '/splash',
       views: {
         'tab-splash': {
-          templateUrl: 'templates/splash-game.html',
+          templateUrl: 'templates/tab-splash.html',
           controller: 'GameCtrl'
         }
       }
