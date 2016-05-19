@@ -26,6 +26,7 @@ angular.module('lolcooldown.controllers', ['lolcooldown.services'])
         var champObj = response.data.data;      
 	  		var champImg= 'http://www.mobafire.com/images/champion/icon/'; 
         var spellImg = 'http://www.mobafire.com/images/ability/';
+        var splashImg= 'http://ddragon.leagueoflegends.com/cdn/img/champion/loading/';
 	  		window.x = champObj;
 
 	  		//loop through each champ object saving name, img, and ability cooldowns
