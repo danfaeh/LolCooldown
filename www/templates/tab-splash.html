@@ -1,0 +1,13 @@
+<ion-view title="Splash">
+  <ion-content>
+    <ion-scroll direction="x" id="champ-scroll">
+      <div class="parent">
+        <hcard ng-repeat="champ in myGame">
+          <img class="child" ng-src="{{ champ.splash }}">
+        </hcard>
+      </div>
+    </ion-scroll>
+  </ion-content>
+</ion-view>
+
+

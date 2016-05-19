@@ -59,6 +59,16 @@ angular.module('lolcooldown', ['ionic', 'lolcooldown.controllers'])
       }
     })
 
+    .state('tab.splash', {
+      url: '/splash',
+      views: {
+        'tab-splash': {
+          templateUrl: 'templates/splash-game.html',
+          controller: 'GameCtrl'
+        }
+      }
+    })    
+
     .state('tab.summoners', {
       url: '/summoners',
       views: {
